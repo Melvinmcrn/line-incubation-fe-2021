@@ -9,8 +9,12 @@ interface OwnershipResponseData {
   status: string;
 }
 
+interface SendMelodyToUserResponseData {
+  message: string;
+}
+
 const getMelody = async (id: number) => {
-  const url = `api/melody/${id}`;
+  const url = `api/melody/${id}/`;
   return await httpClient.get<MelodyData>(url).then((response) => {
     if (response.status === 200 && response.data) {
       return response.data;
@@ -20,7 +24,7 @@ const getMelody = async (id: number) => {
 };
 
 const getFriends = async () => {
-  const url = "api/friends";
+  const url = "api/friends/";
   return await httpClient.get<FriendsResponseData>(url).then((response) => {
     if (response.status === 200 && response.data && response.data.items) {
       return response.data.items;
@@ -30,7 +34,7 @@ const getFriends = async () => {
 };
 
 const getMelodyOwnership = async (userId: number, melodyId: number) => {
-  const url = "api/ownership";
+  const url = "api/ownership/";
   const params = {
     userId,
     melodyId,
@@ -45,4 +49,20 @@ const getMelodyOwnership = async (userId: number, melodyId: number) => {
     });
 };
 
-export { getMelody, getFriends, getMelodyOwnership };
+const sendMelodyToUser = async (userId: number, melodyId: number) => {
+  const url = "api/purchase/";
+  const data = {
+    userId,
+    melodyId,
+  };
+  return await httpClient
+    .post<SendMelodyToUserResponseData>(url, data)
+    .then((response) => {
+      if (response.status === 200 && response.data && response.data.message) {
+        return response.data.message;
+      }
+      throw Error("[sendMelodyToUser] Response has no data");
+    });
+};
+
+export { getMelody, getFriends, getMelodyOwnership, sendMelodyToUser };
