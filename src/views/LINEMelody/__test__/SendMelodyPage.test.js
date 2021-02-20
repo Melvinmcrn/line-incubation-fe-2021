@@ -11,8 +11,8 @@ describe("SendMelodyPage", () => {
     shallow(<SendMelodyPage />);
   });
 
-  // it("should includes two content columns", () => {
-  //   const wrapper = shallow(<SendMelodyPage />);
-  //   expect(wrapper.find(".content-column").length).toEqual(2);
-  // });
+  it("should includes two content columns", () => {
+    const wrapper = shallow(<SendMelodyPage />);
+    expect(wrapper.find(".content-column").length).toEqual(2);
+  });
 });
