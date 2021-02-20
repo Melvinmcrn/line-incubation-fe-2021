@@ -10,12 +10,11 @@ const MELODY_ID = 99;
 const SendMelodyPage: React.FC = () => {
   return (
     <>
-      send melody page
-      <Row justify="center">
+      <Row justify="center" align="middle" style={{ height: "100%" }}>
         <Col flex="500px">
           <MelodyPreview melodyId={MELODY_ID} />
         </Col>
-        <Col>
+        <Col flex="500px" style={{ height: "100%", overflowY: "auto" }}>
           <FriendList melodyId={MELODY_ID} />
         </Col>
       </Row>
