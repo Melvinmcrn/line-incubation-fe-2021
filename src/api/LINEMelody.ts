@@ -5,6 +5,10 @@ interface FriendsResponseData {
   items: FriendData[];
 }
 
+interface OwnershipResponseData {
+  status: string;
+}
+
 const getMelody = async (id: number) => {
   const url = `api/melody/${id}`;
   return await httpClient.get<MelodyData>(url).then((response) => {
@@ -16,7 +20,7 @@ const getMelody = async (id: number) => {
 };
 
 const getFriends = async () => {
-  const url = `api/friends`;
+  const url = "api/friends";
   return await httpClient.get<FriendsResponseData>(url).then((response) => {
     if (response.status === 200 && response.data && response.data.items) {
       return response.data.items;
@@ -25,4 +29,20 @@ const getFriends = async () => {
   });
 };
 
-export { getMelody, getFriends };
+const getMelodyOwnership = async (userId: number, melodyId: number) => {
+  const url = "api/ownership";
+  const params = {
+    userId,
+    melodyId,
+  };
+  return await httpClient
+    .get<OwnershipResponseData>(url, { params })
+    .then((response) => {
+      if (response.status === 200 && response.data && response.data.status) {
+        return response.data.status;
+      }
+      throw Error("[getMelodyOwnership] Response has no data");
+    });
+};
+
+export { getMelody, getFriends, getMelodyOwnership };
