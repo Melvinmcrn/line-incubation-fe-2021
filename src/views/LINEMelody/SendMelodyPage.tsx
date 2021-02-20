@@ -11,10 +11,14 @@ const SendMelodyPage: React.FC = () => {
   return (
     <>
       <Row justify="center" align="middle" style={{ height: "100%" }}>
-        <Col flex="500px">
+        <Col flex="500px" className="content-column">
           <MelodyPreview melodyId={MELODY_ID} />
         </Col>
-        <Col flex="500px" style={{ height: "100%", overflowY: "auto" }}>
+        <Col
+          flex="500px"
+          style={{ height: "100%", overflowY: "auto" }}
+          className="content-column"
+        >
           <FriendList melodyId={MELODY_ID} />
         </Col>
       </Row>
